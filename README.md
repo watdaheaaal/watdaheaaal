@@ -4,7 +4,7 @@
 - 💞️ I’m looking to collaborate on ...
 - 📫 How to reach me ...
 - 😄 Pronouns: He/Him
-- ⚡ Fun fact: I am always forgetful to the point I always cheat
+- ⚡ Fun fact: I am always forgetful to the point I always cheat, although cheating is a bad habit I would still trying hard not to get caught.
 - Socials
 
 <!---
