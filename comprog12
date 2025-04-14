@@ -1,0 +1,134 @@
+/*
+   Name: Turceno, James Gabriel B.
+   Date & Time: 3rd Day of March, Year 2025 @ 7:00 pm
+   Desciption: implementing basic event-driven programming in Java using ActionListener on Calculator.
+*/
+
+// Import necessary Swing and AWT classes
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class MyCalculator extends JFrame {
+    String myDisplay = "";
+    String operator = "";
+    double firstNum = 0;
+    double secondNum = 0;
+    boolean isOperatorClicked = false;
+    JTextField textfield = new JTextField(20);
+
+    // ButtonActionHandler to handle button presses
+    public class ButtonActionHandler implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            String command = e.getActionCommand();
+
+            // Handle number buttons
+            if (command.charAt(0) >= '0' && command.charAt(0) <= '9') {
+                if (isOperatorClicked) {
+                    myDisplay = ""; // Clear display for new number input
+                    isOperatorClicked = false;
+                }
+                myDisplay += command; // Append the number to the display
+                textfield.setText(myDisplay);
+            } 
+            // Handle operator buttons
+            else if (command.equals("+") || command.equals("-") || command.equals("*") || command.equals("/") || command.equals("%")) {
+                if (!myDisplay.isEmpty()) {
+                    firstNum = Double.parseDouble(myDisplay); // Store the first number
+                    operator = command; // Set the operator
+                    isOperatorClicked = true; // Indicate that an operator has been clicked
+                }
+            } 
+            // Handle equal button
+            else if (command.equals("=")) {
+                if (!myDisplay.isEmpty() && operator != null) {
+                    secondNum = Double.parseDouble(myDisplay); // Store the second number
+                    switch (operator) {
+                        case "+":
+                            myDisplay = String.valueOf(firstNum + secondNum);
+                            break;
+                        case "-":
+                            myDisplay = String.valueOf(firstNum - secondNum);
+                            break;
+                        case "*":
+                            myDisplay = String.valueOf(firstNum * secondNum);
+                            break;
+                        case "/":
+                            if (secondNum != 0) {
+                                myDisplay = String.valueOf(firstNum / secondNum);
+                            } else {
+                                myDisplay = "Error";
+                            }
+                            break;
+                        case "%":
+                            myDisplay = String.valueOf(firstNum % secondNum);
+                            break;
+                    }
+                    textfield.setText(myDisplay);
+                    operator = null; // Reset operator after calculation
+                }
+            } 
+            // Handle clear button
+            else if (command.equals("C")) {
+                myDisplay = "";
+                firstNum = 0;
+                secondNum = 0;
+                operator = "";
+                textfield.setText(myDisplay);
+            }
+        }
+    }
+
+    public MyCalculator() {
+        setTitle("My Calculator");
+        setSize(250, 300); // Adjusted size for better visibility
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new FlowLayout(FlowLayout.CENTER));
+
+        textfield.setEditable(false);
+
+        // Define buttons
+        JButton btn1 = new JButton("1");
+        JButton btn2 = new JButton("2");
+        JButton btn3 = new JButton("3");
+        JButton btn4 = new JButton("4");
+        JButton btn5 = new JButton("5");
+        JButton btn6 = new JButton("6");
+        JButton btn7 = new JButton("7");
+        JButton btn8 = new JButton("8");
+        JButton btn9 = new JButton("9");
+        JButton btn0 = new JButton("0");
+
+        JButton btnAdd = new JButton("+");
+        JButton btnSubtract = new JButton("-");
+        JButton btnMulti = new JButton("*");
+        JButton btnDivision = new JButton("/");
+        JButton btnClear = new JButton("C");
+        JButton btnEqual = new JButton("=");
+
+        ButtonActionHandler btnAction = new ButtonActionHandler();
+
+        // Add action listeners to buttons
+        btn1.addActionListener(btnAction);
+        btn2.addActionListener(btnAction);
+        btn3.addActionListener(btnAction);
+        btn4.addActionListener(btnAction);
+        btn5.addActionListener(btnAction);
+        btn6.addActionListener(btnAction);
+        btn7.addActionListener(btnAction);
+        btn8.addActionListener(btnAction);
+        btn9.addActionListener(btnAction);
+        btn0.addActionListener(btnAction);
+
+        btnAdd.addActionListener(btnAction);
+        btnSubtract.addActionListener(btnAction);
+        btnMulti.addActionListener(btnAction);
+        btnDivision.addActionListener(btnAction);
+        btnClear.addActionListener(btnAction);
+        btnEqual.addActionListener(btnAction);
+
+        // Add buttons to the JFrame
+        add(textfield);
+        add(btn7); add(btn8); add(btn9); add(btnAdd);
+        add(btn4); add(btn5); add(btn6); add(btn
